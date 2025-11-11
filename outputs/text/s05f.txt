@@ -1,1 +1,6 @@
-0.7853981633974481
+
+    Linear Transform (z):
+        Same shape, shifted right by 3, stretched by factor of 2. Density scales by 1/|2|, so the peak is lower but the curve is simply shifted and stretched.
+    Non-linear Transform (q):
+        Monotone but not shape-preserving. Values within [-1, 1] map to [exp(-1), exp(1)]. The distribution becomes positively skewed, compressing on the left (near 1/e) and stretching on the right (towards e).
+    

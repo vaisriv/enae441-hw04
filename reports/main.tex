@@ -142,6 +142,8 @@
 		\boxed{\mathbb{E}[X Y]= \frac{1}{6}}
 	\]
 
+	\pagebreak
+
 	\hwkPart{} \label{hwk:s03d}
 
 	\[
@@ -270,33 +272,69 @@
 		\begin{center}
 			\includegraphics[width=0.45\textwidth]{./outputs/figures/s05a.png}
 		\end{center}
-		\caption{Example}
+		\caption{Histogram of \( N = 10 \) Samples of \( x_{1} = \mathcal{U}[-1, 1] \)}
 	\end{figure}
 
 	\hwkPart{} \label{hwk:s05b}
 
-	\inputminted{python}{./outputs/text/s05b.txt}
+	\inputminted[autogobble, firstline=2, firstnumber=1]{python}{./outputs/text/s05b.txt}
 
 	\hwkPart{} \label{hwk:s05c}
 
-	\inputminted{python}{./outputs/text/s05c.txt}
+	\begin{figure}[H] \label{fig:s05c}
+		\begin{center}
+			\begin{subfigure}{0.45\textwidth} \label{fig:s05c1}
+				\includegraphics[width=\linewidth]{./outputs/figures/s05c1.png}
+				\caption{\( \fn*{p}[x_{1}] \) where \( x_{1} = \mathcal{U}[-1, 1] \)}
+			\end{subfigure}
+			\hfill
+			\begin{subfigure}{0.45\textwidth} \label{fig:s05c2}
+				\includegraphics[width=\linewidth]{./outputs/figures/s05c2.png}
+				\caption{\( \fn*{p}[y_{1}] \) where \( y_{1} = \frac{x_{1}+x_{2}}{2} \)}
+			\end{subfigure}
+			\\
+			\begin{subfigure}{0.45\textwidth} \label{fig:s05c3}
+				\includegraphics[width=\linewidth]{./outputs/figures/s05c3.png}
+				\caption{\( \fn*{p}[y_{2}] \) where \( y_{2} = \frac{x_{1}+x_{2}+x_{3}}{3} \)}
+			\end{subfigure}
+			\hfill
+			\begin{subfigure}{0.45\textwidth} \label{fig:s05c4}
+				\includegraphics[width=\linewidth]{./outputs/figures/s05c4.png}
+				\caption{\( \fn*{p}[y_{3}] \) where \( y_{3} = \frac{x_{1}+x_{2}+x_{3}+x_{4}}{4} \)}
+			\end{subfigure}
+		\end{center}
+	\end{figure}
+
+	\pagebreak
 
 	\hwkPart{} \label{hwk:s05d}
 
-	\inputminted{python}{./outputs/text/s05d.txt}
+	\inputminted[autogobble, firstline=2, firstnumber=1]{python}{./outputs/text/s05d.txt}
 
 	\hwkPart{} \label{hwk:s05e}
 	
 	\begin{figure}[H] \label{fig:s05e}
 		\begin{center}
-			\includegraphics[width=0.45\textwidth]{./outputs/figures/s05e.png}
+			\begin{subfigure}{0.45\textwidth} \label{fig:s05e1}
+				\includegraphics[width=\linewidth]{./outputs/figures/s05e1.png}
+				\caption{\( \fn*{p}[y_{3}] \) where \( y_{3} = \frac{x_{1}+x_{2}+x_{3}+x_{4}}{4} \)}
+			\end{subfigure}
+			\\
+			\begin{subfigure}{0.45\textwidth} \label{fig:s05e2}
+				\includegraphics[width=\linewidth]{./outputs/figures/s05e2.png}
+				\caption{\( \fn*{p}[z] \) where \( z = \fn*{g}[y]=2 y+3 \)}
+			\end{subfigure}
+			\hfill
+			\begin{subfigure}{0.45\textwidth} \label{fig:s05e3}
+				\includegraphics[width=\linewidth]{./outputs/figures/s05e3.png}
+				\caption{\( \fn*{p}[q] \) where \( q = \fn*{f}[y]=e^y \)}
+			\end{subfigure}
 		\end{center}
-		\caption{Example}
 	\end{figure}
 
 	\hwkPart{} \label{hwk:s05f}
 
-	\inputminted{python}{./outputs/text/s05f.txt}
+	\inputminted[autogobble, firstline=2, firstnumber=1]{python}{./outputs/text/s05f.txt}
 
 	\hwkCode{} \label{code:s05}
 
