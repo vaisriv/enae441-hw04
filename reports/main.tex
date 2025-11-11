@@ -13,9 +13,9 @@
 %   - Author
 %
 
-\newcommand{\hmwkTitle}{HW00}
-\newcommand{\hmwkSubTitle}{Homework Template}
-\newcommand{\hmwkDueDate}{September 25th. 2025}
+\newcommand{\hmwkTitle}{HW04}
+\newcommand{\hmwkSubTitle}{Random Variables}
+\newcommand{\hmwkDueDate}{November 11th. 2025}
 \newcommand{\hmwkDueTime}{09:30 AM}
 \newcommand{\hmwkClass}{ENAE 441 - 0101}
 \newcommand{\hmwkClassTime}{09:30 AM}
@@ -29,41 +29,278 @@
 
 \pagebreak
 
-\begin{hwkProblem}{1}{Parts} \label{hwk:p01}
+\begin{hwkProblem}{1}{Standard Deviation} \label{hwk:p01}
 
-	\begin{enumerate}[label=(\alph*)]
-		\item \label{hwk:p01a} Instructions
-		\item \label{hwk:p01b} Instructions
-	\end{enumerate}
+	Consider two zero-mean uncorrelated random variables \(W\) and \(V\) with standard deviations \(\sigma_w\) and \(\sigma_v\) respectively. What is the standard deviation of the random variable \(X=W+V\)? Note: Do not assume gaussian distribution.
 
 	\hwkSol{} \label{hwk:s01}
 
-	\hwkPart{} \label{hwk:s01a}
-
-	Answer
-
-	\hwkPart{} \label{hwk:s01b}
-
-	Answer
+	If \(W, V\) are zero-mean and uncorrelated, then
+	\[
+		\Var[W+V]=\Var[W]+\Var[V]+2 \Cov[W, V]=\sigma_w^2+\sigma_v^2
+	\]
+	Hence
+	\[
+		\boxed{\sigma_X=\sqrt{\sigma_w^2+\sigma_v^2}}
+	\]
 
 \end{hwkProblem}
 
-\begin{hwkProblem}{2}{Code} \label{hwk:p02}
+\begin{hwkProblem}{2}{Correlation Coefficient} \label{hwk:p02}
 
-	Instructions
+	Consider two scalar RVs \( X \) and \( Y \).
+
+	\begin{enumerate}[label=(\alph*)]
+		\item \label{hwk:p02a} Prove that if \( X \) and \( Y \) are independent, then their correlation coefficient \( \rho = 0 \).
+		\item \label{hwk:p02b} Find an example of two RVs that are not independent but that have a correlation coefficient of zero.
+		\item \label{hwk:p02c} Prove that if \( Y \) is a linear function of \( X \) then \( \rho = \pm 1 \).
+	\end{enumerate}
 
 	\hwkSol{} \label{hwk:s02}
 
-	\begin{figure}[H] \label{fig:s02}
+	\hwkPart{} \label{hwk:s02a}
+
+	If \(X, Y\) are independent and have finite second moments, then
+	\[
+		\Cov[X, Y]=\mathbb{E}[X Y]-\mathbb{E}[X] \mathbb{E}[Y]=0,
+	\]
+	so
+	\[
+		\boxed{\rho=\frac{\Cov[X, Y]}{\sigma_X \sigma_Y}=0}
+	\]
+	(provided \(\left.\sigma_X, \sigma_Y>0\right)\)
+
+	\hwkPart{} \label{hwk:s02b}
+
+	Let \(X \sim \fn{Unif}[-1,1]\) and \(Y=X^2\). Then
+
+	\[
+		\mathbb{E}[X]=0, \quad \mathbb{E}[Y]=\frac{1}{3}, \quad \mathbb{E}[X Y]=\mathbb{E}\left[X^3\right]=0,
+	\]
+
+	so \(\Cov[X, Y]=0\) and \(\rho=0\), yet \(Y\) is a deterministic function of \(X \implies\) not independent.
+
+	\hwkPart{} \label{hwk:s02c}
+
+	If \(Y=a X+b\) with \(a \neq 0\),
+	\[
+		\Cov[X, Y]=\Cov[X, a X+b]=a \Var[X], \quad \sigma_Y=|a| \sigma_X \\
+	\]
+	so
+	\[
+		\boxed{\rho=\frac{a \Var[X]}{\sigma_X|a| \sigma_X}=\fn{sgn}[a] \in \{\pm 1\}}
+	\]
+	(If \(a=0\), then \(\sigma_Y=0\) and \(\rho\) is undefined.)
+
+\end{hwkProblem}
+
+\begin{hwkProblem}{3}{Probability Density} \label{hwk:p03}
+
+	Consider the following function
+	\[
+		\fn*{f_{XY}}[x, y] = \begin{cases}a e^{-2 x} e^{-3 y} & x>0, y>0 \\ 0 & \text {otherwise}\end{cases}
+	\]
+	and answer the following questions.
+
+	\begin{enumerate}[label=(\alph*)]
+		\item \label{hwk:p03a} Find the value of \(a\) so that \(f_{X Y}(x, y)\) is a valid joint probability density function.
+		\item \label{hwk:p03b} Calculate \(\bar{x}\) and \(\bar{y}\).
+		\item \label{hwk:p03c} Calculate \(\mathbb{E}\left[X^2\right], \mathbb{E}\left[Y^2\right]\), and \(\mathbb{E}[X Y]\).
+		\item \label{hwk:p03d} Calculate the autocorrelation matrix of the random vector \(Z=[X, Y]^T\).
+		\item \label{hwk:p03e} Calculate the variance \(\sigma_x^2\), variance \(\sigma_y^2\), and the covariance \(C_{X Y}\).
+		\item \label{hwk:p03f} Calculate the autocovariance matrix of the random vector \(Z=[X, Y]^T\).
+		\item \label{hwk:p03g} Calculate the correlation coefficient between \(X\) and \(Y\).
+	\end{enumerate}
+
+	\hwkSol{} \label{hwk:s03}
+
+	\hwkPart{} \label{hwk:s03a}
+
+	\[
+		1=\iint f_{X Y}=a\left(\int_0^{\infty} e^{-2 x} d x\right)\left(\int_0^{\infty} e^{-3 y} d y\right)=a\left(\frac{1}{2}\right)\left(\frac{1}{3}\right)=\frac{a}{6} \Rightarrow a=6 .
+	\]
+	Thus \(\fn*{f_{X Y}}[x, y]=6 e^{-2 x} e^{-3 y}\) and factorizes:
+	\[
+		\boxed{X \sim \fn{Exp}[2], Y \sim \fn{Exp}[3]} \qquad \text{independent}
+	\]
+
+	\hwkPart{} \label{hwk:s03b}
+
+	\[
+		\boxed{\bar{x}=\mathbb{E}[X]=\frac{1}{2}, \quad \bar{y}=\mathbb{E}[Y]=\frac{1}{3}}
+	\]
+
+	\hwkPart{} \label{hwk:s03c}
+
+	For \(\operatorname{Exp}(\lambda) \mathbb{E}\left[X^2\right]=\frac{2}{\lambda^2}\)
+	\begin{align*}
+		\mathbb{E}\left[X^2\right]&=\frac{2}{2^2}=\frac{1}{2} \\
+		\mathbb{E}\left[Y^2\right]&=\frac{2}{3^2}=\frac{2}{9} \\
+		\mathbb{E}[X Y]&=\mathbb{E}[X] \mathbb{E}[Y]=\frac{1}{2} \cdot \frac{1}{3}
+	\end{align*}
+	\[
+		\boxed{\mathbb{E}[X Y]= \frac{1}{6}}
+	\]
+
+	\hwkPart{} \label{hwk:s03d}
+
+	\[
+		R_Z=\left[\begin{array}{cc}
+			\mathbb{E}\left[X^2\right] & \mathbb{E}[X Y] \\
+			\mathbb{E}[Y X] & \mathbb{E}\left[Y^2\right]
+		\end{array}\right]=
+		\left[\begin{array}{cc}
+			\frac{1}{2} & \frac{1}{6} \\
+			\frac{1}{6} & \frac{2}{9}
+		\end{array}\right]
+	\]
+
+	\hwkPart{} \label{hwk:s03e}
+
+	\[
+		\sigma_x^2=\mathbb{E}\left[X^2\right]-\bar{x}^2=\frac{1}{2}-\frac{1}{4}=\frac{1}{4}
+	\]
+	\[
+		\sigma_y^2=\frac{2}{9}-\frac{1}{9}=\frac{1}{9}
+	\]
+	\[
+		C_{X Y}=\mathbb{E}[X Y]-\bar{x} \bar{y}=\frac{1}{6}-\frac{1}{6}=0
+	\]
+
+	\hwkPart{} \label{hwk:s03f}
+
+	\[
+		K_Z=\left[\begin{array}{cc}
+			\sigma_x^2 & C_{X Y} \\
+			C_{X Y} & \sigma_y^2
+		\end{array}\right]=
+		\left[\begin{array}{cc}
+			\frac{1}{4} & 0 \\
+			0 & \frac{1}{9}
+		\end{array}\right]
+	\]
+
+	\hwkPart{} \label{hwk:s03g}
+
+	\[
+		\rho=\frac{C_{X Y}}{\sigma_x \sigma_y}=0
+	\]
+
+\end{hwkProblem}
+
+\begin{hwkProblem}{4}{Covariance and Variance} \label{hwk:p04}
+
+	Prove the following two results from lecture where \(x \sim \mathcal{N}\left(\bar{x}, \sigma_x^2\right)\) and \(e \sim \mathcal{N}\left(0, \sigma_e^2\right)\) and \(y=c x+d e\).
+
+	\begin{enumerate}[label=(\alph*)]
+		\item \label{hwk:p04a} \(\Cov[X, Y]=\mathbb{E}[(x-\bar{x})(y-\bar{y})]=\mathbb{E}[X Y]-\bar{x} \bar{y}\)
+		\item \label{hwk:p04b} \(\Var[Y]=\mathbb{E}\left[(y-\bar{y})^2\right]=c^2 \sigma_x^2+d^2 \sigma_e^2\)
+	\end{enumerate}
+	\hwkSol{} \label{hwk:s04}
+
+	\hwkPart{} \label{hwk:s04a}
+
+	Let \(\mu_X=\mathbb{E}[X]\) and \(\mu_Y=\mathbb{E}[Y]\).
+	\[
+		\begin{aligned}
+			\mathbb{E}\left[\left(X-\mu_X\right)\left(Y-\mu_Y\right)\right] & =\mathbb{E}\left[X Y-\mu_X Y-\mu_Y X+\mu_X \mu_Y\right] \\
+											& =\mathbb{E}[X Y]-\mu_X \mathbb{E}[Y]-\mu_Y \mathbb{E}[X]+\mu_X \mu_Y \\
+											& =\mathbb{E}[X Y]-\mu_X \mu_Y-\mu_Y \mu_X+\mu_X \mu_Y \\
+											& =\mathbb{E}[X Y]-\mu_X \mu_Y
+		\end{aligned}
+	\]
+	Thus
+	\[
+		\Cov[X, Y]=\mathbb{E}\left[\left(X-\mu_X\right)\left(Y-\mu_Y\right)\right]=\mathbb{E}[X Y]-\mathbb{E}[X] \mathbb{E}[Y]
+	\]
+	\[
+		\implies \boxed{\Cov[X, Y]=\mathbb{E}[X Y]-\bar{x}\bar{y}}
+	\]
+
+	\hwkPart{} \label{hwk:s04b}
+
+	\[
+		\bar{y}=\mathbb{E}[Y]=c \mathbb{E}[x]+d \mathbb{E}[e]=c \bar{x}
+	\]
+	Then
+	\[
+		Y-\bar{y}=c(x-\bar{x})+d e
+	\]
+	Hence
+	\[
+		\Var[Y]=\mathbb{E}\left[(c(x-\bar{x})+d e)^2\right]=c^2 \sigma_x^2+d^2 \sigma_e^2+2 c d \mathbb{E}[(x-\bar{x}) e]
+	\]
+	If \(x\) and \(e\) are independent (or just uncorrelated), \(\mathbb{E}[(x-\bar{x}) e]=0\), giving
+	\[
+		\boxed{\Var[Y]=c^2 \sigma_x^2+d^2 \sigma_e^2}
+	\]
+
+\end{hwkProblem}
+
+\begin{hwkProblem}{5}{Central Limit Theorem + Mappings} \label{hwk:p05}
+
+	\begin{enumerate}[label=(\alph*)]
+		\item \label{hwk:p05a} In python, generate a random variable \(x_1\) distributed by a uniform distribution \(x_i \sim \mathcal{U}[-1,1]\) using \texttt{np.random.uniform} function. Sample \(N=10\) points from this distribution, plot those points as a histogram.
+		\item \label{hwk:p05b} Compute the sample mean, \(\hat{\mu}\), and sample variance, \(\hat{\sigma}^2\), of a sample set using functions \texttt{np.mean} and \texttt{np.var} functions, and determine if the reported values match the analytic mean and variance, \(\mathbb{E}\left[x_1\right]\) and \(\mathbb{E}\left[\left(x_1-\mu_{x_1}\right)^2\right]\) respectively? Repeat using \(N=10^i\) samples where \(1 \leq i \leq 6\), reporting the sample mean. Report the values and explain what you observe.
+		\item \label{hwk:p05c} Create three new random variables \(x_2, x_3, x_4\) in addition to \(x_1\), each also distributed from a uniform distribution \(\mathcal{U}[-1,1]\). Sample \(N=100,000\) values from \(x_1-x_4\), and use these independent variables to compute a new set of random variables \(y_1, y_2\), and \(y_3\) defined as
+			\[
+				\begin{aligned}
+					y_1&=\frac{x_1+x_2}{2} \\
+					y_2&=\frac{x_1+x_2+x_3}{3} \\
+					y_3&=\frac{x_1+x_2+x_3+x_4}{4}
+				\end{aligned}
+			\]
+			Using the sampled values of \(x_1\) through \(x_4\), plot a histogram \(\fn*{p}[x_{1}], \fn*{p}[y_{1}], \fn*{p}[y_{2}], \fn*{p}[y_{3}]\).
+		\item \label{hwk:p05d} Explain what you see.
+		\item \label{hwk:p05e} Transform \(y_3\) into two new random variables \(z\) and \(q\) and plot the resulting distributions of \(\fn*{p}[z]\) and \(\fn*{p}[q]\) next to the original distribution \(\fn*{p}[y_{3}]\) where
+			\[
+				\begin{aligned}
+					z&=\fn*{g}[y]=2 y+3 \\
+					q&=\fn*{f}[y]=e^y
+				\end{aligned}
+			\]
+		\item \label{hwk:p05f} Explain how the distribution changes with both transformations, and if it makes sense.
+	\end{enumerate}
+
+	\hwkSol{} \label{hwk:s05}
+
+	\hwkPart{} \label{hwk:s05a}
+
+	\begin{figure}[H] \label{fig:s05a}
 		\begin{center}
-			\includegraphics[width=0.95\textwidth]{./outputs/figures/s02.png}
+			\includegraphics[width=0.45\textwidth]{./outputs/figures/s05a.png}
 		\end{center}
 		\caption{Example}
 	\end{figure}
 
-	\hwkCode{} \label{code:s02}
+	\hwkPart{} \label{hwk:s05b}
 
-	See the \href{https://www.github.com/vaisriv/enae441-hw-template/blob/main/code/hw00.py}{Python code} for this assignment.
+	\inputminted{python}{./outputs/text/s05b.txt}
+
+	\hwkPart{} \label{hwk:s05c}
+
+	\inputminted{python}{./outputs/text/s05c.txt}
+
+	\hwkPart{} \label{hwk:s05d}
+
+	\inputminted{python}{./outputs/text/s05d.txt}
+
+	\hwkPart{} \label{hwk:s05e}
+	
+	\begin{figure}[H] \label{fig:s05e}
+		\begin{center}
+			\includegraphics[width=0.45\textwidth]{./outputs/figures/s05e.png}
+		\end{center}
+		\caption{Example}
+	\end{figure}
+
+	\hwkPart{} \label{hwk:s05f}
+
+	\inputminted{python}{./outputs/text/s05f.txt}
+
+	\hwkCode{} \label{code:s05}
+
+	See the \href{https://www.github.com/vaisriv/enae441-hw04/blob/main/src/hw04.py}{Python code} for this assignment.
 
 \end{hwkProblem}
 
